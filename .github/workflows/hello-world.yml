@@ -1,0 +1,17 @@
+name: Hello World Pipeline
+
+# Définit l'événement qui déclenche le pipeline
+on:
+  push:
+    branches:
+      - main # S'exécute à chaque push sur la branche main
+
+jobs:
+  say-hello:
+    # Définit l'environnement d'exécution
+    runs-on: ubuntu-latest 
+    
+    steps:
+      # L'action concrète à exécuter
+      - name: Afficher le message
+        run: echo "Hello, World!"
