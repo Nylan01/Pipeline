@@ -1,0 +1,45 @@
+name: Division Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      nombre:
+        description: 'Nombre à diviser'
+        required: true
+        default: '64'
+
+jobs:
+  Dev:
+    runs-on: ubuntu-latest
+    outputs:
+      resultat: ${{ steps.division.outputs.resultat }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Diviser par 2
+        id: division
+        run: python scripts/diviser.py ${{ inputs.nombre || '64' }} 2
+
+  Val:
+    needs: Dev
+    runs-on: ubuntu-latest
+    outputs:
+      resultat: ${{ steps.division.outputs.resultat }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Diviser par 4
+        id: division
+        run: python scripts/diviser.py ${{ needs.Dev.outputs.resultat }} 4
+
+  Prod:
+    needs: Val
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Diviser par 8
+        run: python scripts/diviser.py ${{ needs.Val.outputs.resultat }} 8
