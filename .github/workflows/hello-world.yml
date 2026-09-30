@@ -4,12 +4,38 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # <-- C'est cette ligne qui active le déclenchement manuel
 
 jobs:
   say-hello:
-    runs-on: ubuntu-latest 
-    
+    runs-on: ubuntu-latest
+
     steps:
       - name: Afficher le message
         run: echo "Hello, World!"
+
+  afficher-nom:
+    runs-on: ubuntu-latest
+    env:
+      NOM: ${{ vars.NOM }}
+
+    steps:
+      - name: Afficher le nom
+        run: echo "Nom : $NOM"
+
+  afficher-prenom:
+    runs-on: ubuntu-latest
+    env:
+      PRENOM: ${{ vars.PRENOM }}
+
+    steps:
+      - name: Afficher le prénom
+        run: echo "Prénom : $PRENOM"
+
+  afficher-email:
+    runs-on: ubuntu-latest
+    env:
+      EMAIL: ${{ vars.EMAIL }}
+
+    steps:
+      - name: Afficher l'email
+        run: echo "Email : $EMAIL"
