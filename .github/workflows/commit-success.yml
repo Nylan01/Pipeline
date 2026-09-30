@@ -1,0 +1,22 @@
+name: Commit Success Pipeline
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  commit-success:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Lancer le script
+        run: python scripts/commit_success.py
