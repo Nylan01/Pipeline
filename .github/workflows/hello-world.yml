@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Afficher le nom
-        run: echo "Nom : $NOM"
+        run: 'echo "Nom : $NOM"'
 
   afficher-prenom:
     runs-on: ubuntu-latest
@@ -29,7 +29,7 @@ jobs:
 
     steps:
       - name: Afficher le prénom
-        run: echo "Prénom : $PRENOM"
+        run: 'echo "Prénom : $PRENOM"'
 
   afficher-email:
     runs-on: ubuntu-latest
@@ -38,4 +38,4 @@ jobs:
 
     steps:
       - name: Afficher l'email
-        run: echo "Email : $EMAIL"
+        run: 'echo "Email : $EMAIL"'
