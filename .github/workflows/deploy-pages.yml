@@ -13,7 +13,19 @@ permissions:
   id-token: write
 
 jobs:
+  # Lit le code et vérifie le HTML : si une erreur est trouvée, la pipeline s'arrête ici
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Vérifier le HTML
+        run: npx --yes htmlhint@1.1.4 "site/**/*.html"
+
   build:
+    needs: lint
     runs-on: ubuntu-latest
 
     steps:
